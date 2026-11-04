@@ -1,0 +1,24 @@
+# Blueprint de Render: "New + → Blueprint" y elige tu repositorio de GitHub.
+services:
+  - type: web
+    name: manage-parking
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: MODO_DEMO          # 1 = datos y cuentas de demostración · 0 = instalación real
+        value: "1"
+      - key: JWT_SECRET         # Render genera un valor aleatorio seguro
+        generateValue: true
+      - key: ADMIN_EMAIL        # te lo pregunta al crear el servicio
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: DATABASE_URL       # pega aquí la cadena de Neon (o usa fromDatabase si creas Postgres en Render)
+        sync: false
+      - key: CONJUNTO
+        value: Conjunto Torre Central
